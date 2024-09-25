@@ -1,0 +1,10 @@
+<h1>Survival Entries</h1>
+<ul>
+    {% for entry in entries %}
+    <li>
+        <strong>{{ entry.entry_name }}</strong><br>
+        Price: ${{ entry.price }}<br>
+        <a href="{% url 'add_to_cart' entry.id %}">Add to Cart</a>
+    </li>
+    {% endfor %}
+</ul>

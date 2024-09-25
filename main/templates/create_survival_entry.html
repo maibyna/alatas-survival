@@ -2,17 +2,32 @@
 {% block content %}
 <h1>Add New Survival Entry</h1>
 
+<h2>Available Products</h2>
+<ul>
+    {% for product in products %}
+    <li>
+        <strong>{{ product.name }}</strong><br>
+        Price: ${{ product.price }}<br>
+        Description: {{ product.description }}<br>
+    </li>
+    {% endfor %}
+</ul>
+
+<h2>Choose Product to Purchase</h2>
 <form method="POST">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-    <tr>
-      <td></td>
-      <td>
-        <input type="submit" value="Add Survival Entry" />
-      </td>
-    </tr>
-  </table>
+    {% csrf_token %}
+    <label for="product_id">Select Product:</label>
+    <select name="product_id" id="product_id">
+        {% for product in products %}
+        <option value="{{ product.id }}">{{ product.name }} - ${{ product.price }}</option>
+        {% endfor %}
+    </select>
+    
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" id="quantity" min="1" value="1" />
+
+    <input type="submit" value="Purchase" />
 </form>
+
 
 {% endblock %}

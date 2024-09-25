@@ -9,6 +9,17 @@
 <h5>Class:</h5>
 <p>{{ class }}</p>
 
+<h2>Available Products</h2>
+<ul>
+    {% for product in products %}
+    <li>
+        <strong>{{ product.name }}</strong><br>
+        Price: ${{ product.price }}<br>
+        Description: {{ product.description }}<br>
+    </li>
+    {% endfor %}
+</ul>
+
 {% if not survival_entries %}
 <p>Belum ada data survival entry pada tracker.</p>
 {% else %}
@@ -20,8 +31,6 @@
     <th>Deskripsi</th>
   </tr>
 
-  {% comment %} Berikut cara memperlihatkan data survival entry di bawah baris ini 
-  {% endcomment %}
   {% for survival_entry in survival_entries %}
   <tr>
     <td>{{survival_entry.name}}</td>
@@ -37,6 +46,35 @@
 
 <a href="{% url 'main:create_survival_entry' %}">
   <button>Add New Survival Entry</button>
+</a>
+
+<h2>Your Purchase History</h2>
+<table>
+    <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Description</th>
+    </tr>
+    {% for purchase in purchases %}
+    <tr>
+        <td>{{ purchase.product.name }}</td>
+        <td>{{ purchase.quantity }}</td>
+        <td>${{ purchase.price }}</td>
+        <td>{{ purchase.description }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No purchase history available.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+<a href="{% url 'main:logout' %}">
+  <button>Logout</button>
+  <h5>Sesi terakhir login: {{ last_login }}</h5>  
 </a>
 
 {% endblock content %}

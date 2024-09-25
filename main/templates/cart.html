@@ -1,0 +1,8 @@
+<h1>Your Cart</h1>
+<ul>
+    {% for item in cart_items %}
+    <li>{{ item.entry.name }} (x{{ item.quantity }})</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'survival_entry_list' %}">Continue Shopping</a>
+

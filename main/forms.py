@@ -5,3 +5,4 @@ class SurvivalEntryForm(ModelForm):
     class Meta:
         model = SurvivalEntry
         fields = ["name", "price", "description"]
+
