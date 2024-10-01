@@ -9,6 +9,7 @@ class SurvivalEntryForm(ModelForm):
         model = SurvivalEntry
         fields = ["name", "price", "description"]
 
+<<<<<<< HEAD
 # class CustomUserCreationForm(UserCreationForm):
 #     class Meta:
 #         model = User
@@ -21,3 +22,5 @@ class SurvivalEntryForm(ModelForm):
 #         self.fields['password2'].help_text = None
 
 
+=======
+>>>>>>> 295280dd14830525e1259534734d33c72263a24e

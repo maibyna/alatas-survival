@@ -1,3 +1,30 @@
+README TUGAS 4
+ 1. Apa perbedaan antara HttpResponseRedirect() dan redirect()
+Keduanya sama-sama library langsung Django yang di-import, namun perbedaannya terdapat pada hierarki penggunaan. HttpResponseRedirect() secara penggunaan, mewajibkan developer untuk menyebutkan secara eksplisit link/url/atau tautan yang ingin disambungkan. Dalam program saya biasa digunakan untuk ke situs peramban html yang saya buat.
+
+Sedangkan pada redirect() ini dapat berupa string, suatu arah yang masih di dalam program dan kelas/aplikasi. Contoh sederhana yang paling sering digunakan dalam program saya adalah “main: show_menu”
+
+2. Jelaskan cara kerja penghubungan model Product dengan User!
+Dalam aplikasi alatas-survival ini, user dihubungkan dengan dua kelas yaitu kelas SurvivalEntry dan kelas Purchase. Kedua fungsi ini memiliki tujuan yang hampir sama, namun saling melengkapi. Dalam SurvivalEntry ini, terdapat pengelolaan dari bagaimana saya membuat product-product (dalam bentuk objek, yang masing-masing dibawa oleh identitas ID, nama produk, harga, dan deskripsi. User, yang diambil dari ForeignKey ini, berfungsi untuk membantu pengarahan program product ini juga bisa menjadi objek yang terhubung dengan User.
+
+Sedangkan dalam Purchase, orientasinya lebih untuk menyajikan history, dan membantu pada proses penyajian opsi ketika user akan memilih barang.
+
+3. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+Authentication didapat dari jawaban “siapakah yang login”, ini dimaksudkan memverifikasi identitas pengguna. Termasuk tentang ID/perihal kredensial yang melekat pada pengguna tersebut. Namun dalam case authorization, adalah untuk menjawab pertanyaan “apa kebebasan yang diberikan kepada pihak-pihak tersebut”. 
+
+Di dalam aplikasi alatas-survival, bentuk authentication itu terletak pada awal login, saat pengguna diminta untuk memasukkan username dan password. Sedangkan untuk authorization, itu terletak di bagian setiap pengguna yang hanya mampu mengakses historynya masing-masing.
+
+4. Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+Session di server menyimpan informasi siapa pengguna yang masuk, sedangkan Cookie di browser menyimpan session ID, yang server gunakan untuk mengidentifikasi pengguna. Django menggunakan kombinasi session dan cookies untuk mengingat pengguna yang sudah login.
+
+Untuk cookies tentu memiliki tantangan tersendiri karena berpotensi di salah gunakan oleh pihak lain untuk menyerang menggunakan cookie yang teridentifikasi tersebut. 
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+Pertama, saya terlebih dahulu membuat produk lebih lanjut terkait barang yang ada di e-commerse saya. Lalu, saya menghadapi error saat data tersebut harus saya simpan dalam bentuk object, bukan sekadar list. Lalu, saya memadu padankan, bagaimana sebaiknya saya hanya menampilkan barang yang saya miliki (dengan objek tadi saya sajikan dalam tabel) lalu user hanya perlu memilih menggunakan selection form, tentang barang yang di-purchase, beserta kuantitasnya. Untuk harga dan deskripsi, itu langsung tertera di tabel informasi. Setelah memastikan objek bisa diakses (barang dalam e-commerse) barulah saya memproses pembuatan kedua pengguna dummy, sebagai uji coba.
+
+Dalam kasus ini, karena pada pemprosesan mempersiapkan history purchase pengguna, ternyata saya telah mengimplementasikan ForeignKey, dan dapat berlanjut langsung ke tahap terakhir sebelum push github.
+
+
 README TUGAS 3
 1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
    Data delivery dalam eksistensinya sendiri, itu ditujukan untuk membantu proses pengiriman data dari satu sistem, aplikasi, atau perangkat ke sistem lainnya melalui jaringan. Secara tidak langsung, data delivery (dengan berbagai format yang ada) itu menjadi kebutuhan penting dalam penyampaian informasi. Jika dikaitkan dengan pengimplementasian data delivery dalam sebuah platform, data delivery akan sangat membantu menghubungkan antar server/jaringan/client terkait, dan dibantu koneksi berbagai format, delivery ini memberikan kemampuan interoperabilitas. Di sisi lain, karena terkait jaringan, data delivery membantu informasi didistribusikan secara real-time dan kompatibel di aplikasi mobile maupun pihak ketiga.

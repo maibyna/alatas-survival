@@ -1,7 +1,11 @@
 import datetime
+<<<<<<< HEAD
 from django.shortcuts import render,   get_object_or_404, redirect, reverse  # Tambahkan import redirect di baris ini
+=======
+from django.shortcuts import render,   get_object_or_404, redirect   # Tambahkan import redirect di baris ini
+>>>>>>> 295280dd14830525e1259534734d33c72263a24e
 from main.forms import SurvivalEntryForm
-from main.models import SurvivalEntry
+from main.models import SurvivalEntry, Purchase, Product
 from django.http import HttpResponse
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
@@ -10,18 +14,33 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+<<<<<<< HEAD
 from django.shortcuts import render, redirect
 
 
 @login_required(login_url='/login')
 def show_main(request):
     survival_entries = SurvivalEntry.objects.filter(user=request.user)
+=======
+
+@login_required(login_url='/login')
+def show_main(request):
+    survival_entries = SurvivalEntry.objects.all()
+    purchases = Purchase.objects.filter(user=request.user)
+>>>>>>> 295280dd14830525e1259534734d33c72263a24e
     last_login = request.COOKIES.get('last_login', 'No last login available')
     
     context = {
         'name': request.user.username,
         'class': 'PBP B',
         'survival_entries' : survival_entries,
+<<<<<<< HEAD
+=======
+        
+        'purchases': purchases,
+
+        
+>>>>>>> 295280dd14830525e1259534734d33c72263a24e
         'last_login': last_login,
     }
 
@@ -56,18 +75,30 @@ def login_user(request):
     context = {'form': form}
     return render(request, 'login.html', context)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 295280dd14830525e1259534734d33c72263a24e
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
 
+<<<<<<< HEAD
+=======
+def get_available_products():
+    return Product.objects.all()  # Mengambil semua produk dari database
+>>>>>>> 295280dd14830525e1259534734d33c72263a24e
 
 @login_required
 def create_survival_entry(request):
     form = SurvivalEntryForm(request.POST or None)
+    
+    # Mendapatkan semua produk dari database
+    products = Product.objects.all()  # Gunakan model Product untuk mengambil produk yang tersedia dari database
 
+<<<<<<< HEAD
     if form.is_valid() and request.method == "POST":
         # Simpan data dari form, tapi belum commit ke database
         survival_entry = form.save(commit=False)
@@ -107,6 +138,33 @@ def delete_survival_entry(request, id):
     survival.delete()
     # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
+=======
+    if request.method == "POST":
+        product_id = request.POST.get("product_id")  # Mengambil product_id dari form
+        quantity = request.POST.get("quantity")
+
+        # Mendapatkan produk yang dipilih dari database menggunakan product_id
+        selected_product = Product.objects.filter(id=product_id).first()
+
+        if selected_product and quantity.isdigit() and int(quantity) > 0:
+            # Simpan pembelian ke database
+            Purchase.objects.create(
+                user=request.user,
+                product=selected_product,
+                quantity=int(quantity),
+                price=selected_product.price * int(quantity),
+                description=selected_product.description
+            )
+            response = redirect('main:show_main')
+            # Set cookie 'last_login' saat pembelian
+            response.set_cookie('last_login', request.COOKIES.get('last_login', 'Data login tidak tersedia'))
+            return response
+            #return redirect('main:show_main')  # Redirect kembali ke halaman utama setelah pembelian
+
+    context = {'products': products, 'form': form}
+    return render(request, "create_survival_entry.html", context)
+
+>>>>>>> 295280dd14830525e1259534734d33c72263a24e
 
 def show_xml(request):
     data = SurvivalEntry.objects.all()

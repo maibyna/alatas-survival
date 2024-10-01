@@ -1,7 +1,11 @@
 from django.urls import path
 from . import views
+<<<<<<< HEAD
 from main.views import show_main, create_survival_entry, edit_survival_entry, delete_survival_entry
 from main.views import show_xml, show_json, show_xml_by_id, show_json_by_id
+=======
+from main.views import show_main, create_survival_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
+>>>>>>> 295280dd14830525e1259534734d33c72263a24e
 from main.views import register
 from main.views import login_user, logout_user
 
@@ -14,9 +18,15 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
 
     path('create-survival-entry', create_survival_entry, name='create_survival_entry'),
+<<<<<<< HEAD
     path('edit-mood/<uuid:id>', edit_survival_entry, name='edit_survival_entry'),   
     path('delete/<uuid:id>', delete_survival_entry, name='delete_survival_entry'),
  
+=======
+    # path('entries/', views.survival_entry_list, name='survival_entry_list'),
+    # path('add-to-cart/<int:entry_id>/', views.add_to_cart, name='add_to_cart'),
+    # path('cart/', views.view_cart, name='cart'),
+>>>>>>> 295280dd14830525e1259534734d33c72263a24e
 
     path('xml/', show_xml, name='show_xml'),
     path('json/', show_json, name='show_json'),

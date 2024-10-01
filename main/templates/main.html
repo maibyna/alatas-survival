@@ -30,6 +30,7 @@
       margin-bottom: 20px;
   }
 
+<<<<<<< HEAD
   /* Kelas glass-card dihapus, diganti dengan kelas card biasa */
   .card {
       background-color: rgba(255, 255, 255, 0.9); /* Ganti dengan warna latar belakang biasa */
@@ -174,6 +175,29 @@
 
 <div class="container">
   <h2 class="bold" style="font-size: 24px; font-family: 'Papyrus', sans-serif;">The Cards of Your Survival Entries</h2>
+=======
+<h2>Available Products</h2>
+<ul>
+    {% for product in products %}
+    <li>
+        <strong>{{ product.name }}</strong><br>
+        Price: ${{ product.price }}<br>
+        Description: {{ product.description }}<br>
+    </li>
+    {% endfor %}
+</ul>
+
+{% if not survival_entries %}
+<p>Belum ada data survival entry pada tracker.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Nama Barang</th>
+    <th>Waktu Masuk</th>
+    <th>Harga</th>
+    <th>Deskripsi</th>
+  </tr>
+>>>>>>> 295280dd14830525e1259534734d33c72263a24e
 
   {% for survival_entry in survival_entries %}
       <div class="card mb-3" style="max-width: 300;">
@@ -205,4 +229,40 @@
 </div>
 
 
+<<<<<<< HEAD
+=======
+<a href="{% url 'main:create_survival_entry' %}">
+  <button>Add New Survival Entry</button>
+</a>
+
+<h2>Your Purchase History</h2>
+<table>
+    <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Description</th>
+    </tr>
+    {% for purchase in purchases %}
+    <tr>
+        <td>{{ purchase.product.name }}</td>
+        <td>{{ purchase.quantity }}</td>
+        <td>${{ purchase.price }}</td>
+        <td>{{ purchase.description }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">No purchase history available.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+
+<a href="{% url 'main:logout' %}">
+  <button>Logout</button>
+  <h5>Sesi terakhir login: {{ last_login }}</h5>  
+</a>
+
+>>>>>>> 295280dd14830525e1259534734d33c72263a24e
 {% endblock content %}
