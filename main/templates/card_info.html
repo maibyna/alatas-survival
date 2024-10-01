@@ -1,0 +1,22 @@
+<div class="bg-[#17237c] rounded-xl overflow-hidden border-2 border-indigo-800 shadow-lg transform hover:scale-105 transition-transform duration-300">
+    <!-- Card Body -->
+    <div class="p-6 animate-shine">
+        <h5 class="text-lg font-semibold text-[#dcdcdc] mb-2">{{ title }}</h5>
+        <p class="text-[#fffff0]">{{ value }}</p>
+    </div>
+</div>
+
+<style>
+  /* Custom animation for shining effect */
+  .animate-shine {
+      background: linear-gradient(110deg, rgba(255, 255, 255, 0.1) 8%, rgba(255, 255, 255, 0.2) 18%, rgba(255, 255, 255, 0.1) 33%);
+      background-size: 200% 100%;
+      animation: shine 2s linear infinite;
+  }
+
+  @keyframes shine {
+      to {
+          background-position: 200% center;
+      }
+  }
+</style>

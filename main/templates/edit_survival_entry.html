@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+{% load static %}
+
+{% block meta %}
+<title>Edit Survival Entry</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: url('{% static "image/tangan.jpg" %}') no-repeat center center fixed;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+    .input-field {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .input-field:focus {
+        transform: scale(1.02);
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+    .form-container {
+        animation: fadeIn 0.5s ease-in-out;
+        background-color: rgba(255, 255, 240, 0.9); /* Gading dengan transparansi */
+        position: relative; /* Tambahan untuk z-index */
+        z-index: 1; /* Menyatakan z-index agar elemen terlihat di atas */
+    }
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+{% endblock meta %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<div class="flex flex-col min-h-screen">
+  <div class="container mx-auto px-4 py-8 mt-16 max-w-lg">
+    <h1 class="text-4xl font-bold text-center mb-6 text-[#fffff0]">Edit Survival Entry</h1>
+  
+    <div class="bg-[#fffff0] rounded-lg shadow-lg p-8 form-container">
+      <form method="POST" class="space-y-6">
+          {% csrf_token %}
+          
+          {% for field in form %}
+              <div class="flex flex-col mb-4">
+                  <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-gray-700 text-lg">
+                      {{ field.label }}
+                  </label>
+                  <div class="w-full">
+                      {{ field|add_class:"input-field border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#17237c]" }}
+                  </div>
+                  {% if field.help_text %}
+                      <p class="mt-1 text-sm text-gray-500">{{ field.help_text }}</p>
+                  {% endif %}
+                  {% for error in field.errors %}
+                      <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+                  {% endfor %}
+              </div>
+          {% endfor %}
+          
+          <div class="flex flex-col items-center mt-8">
+              <button type="submit" class="bg-[#17237c] text-white font-semibold px-8 py-4 rounded-lg hover:bg-[#1b2a8c] transition duration-300 ease-in-out w-full">
+                  Update Survival Entry
+              </button>
+              <a href="{% url 'main:show_main' %}" class="mt-4 text-indigo-600 hover:text-indigo-800">Kembali ke halaman utama</a>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

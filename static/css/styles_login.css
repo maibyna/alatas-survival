@@ -1,0 +1,64 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background: url('{% static "image/darkside.jpg" %}') no-repeat center center fixed; /* Ganti dengan path gambar Anda */
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: #fffff0;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2rem; /* Mengubah ukuran font */
+    margin-bottom: 20px; /* Menambah ruang bawah */
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+input[type="text"], input[type="password"] {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc; /* Warna border default */
+    border-radius: 8px;
+    transition: border 0.3s; /* Menambahkan transisi */
+    background-color: #f9f9f9; /* Warna latar belakang text field */
+    color: #333; /* Warna teks di dalam text field */
+}
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #17237c; /* Ubah warna border saat fokus */
+}
+button {
+    padding: 10px;
+    background-color: #17237c;
+    color: #fffff0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Menambahkan transisi */
+}
+button:hover {
+    background-color: #0f1f5d; /* Warna saat hover */
+}
+.link {
+    text-align: center;
+    margin-top: 15px;
+}
+.messages {
+    color: red; /* Gaya untuk pesan kesalahan */
+    text-align: center;
+    margin-top: 10px;
+}
+

@@ -1,42 +1,208 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
+{% include 'navbar.html' %}
 
-<h1>Alatas Survival</h1>
+<style>
+  body {
+      font-family: Arial, sans-serif;
+      background: url('{% static "image/darkside.jpg" %}') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: #333;
+  }
 
-<h5>Name:</h5>
-<p>{{ name }}</p>
+  .container {
+      max-width: 800px;
+      margin: 100px auto;
+      padding: 30px;
+      background-color: #fffff0; /* Putih gading */
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      animation: slide-in 0.8s ease-out;
+  }
 
-<h5>Class:</h5>
-<p>{{ class }}</p>
+  h1, h2 {
+      color: #17237c; /* Biru gelap untuk heading */
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+  }
 
-{% if not survival_entries %}
-<p>Belum ada data survival entry pada tracker.</p>
-{% else %}
-<table>
-  <tr>
-    <th>Nama Barang</th>
-    <th>Waktu Masuk</th>
-    <th>Harga</th>
-    <th>Deskripsi</th>
-  </tr>
+  /* Kelas glass-card dihapus, diganti dengan kelas card biasa */
+  .card {
+      background-color: rgba(255, 255, 255, 0.9); /* Ganti dengan warna latar belakang biasa */
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 15px;
+      padding: 20px;
+      color: black; /* Ubah teks menjadi hitam */
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+  }
 
-  {% comment %} Berikut cara memperlihatkan data survival entry di bawah baris ini 
-  {% endcomment %}
+  .card h5 {
+      font-size: 1.2rem;
+      margin: 10px 0;
+  }
+
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fffff0; /* Putih gading untuk tabel */
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+      font-size: 1rem;
+  }
+
+  th {
+      background-color: #17237c; /* Biru gelap untuk heading tabel */
+      color: #fffff0; /* Putih gading untuk teks */
+  }
+
+  tr:nth-child(even) {
+      background-color: #f9f9f9; /* Abu-abu sangat muda */
+  }
+
+  tr:hover {
+      background-color: #e6e6e6; /* Abu-abu sedikit lebih gelap saat hover */
+  }
+
+  button {
+      padding: 10px;
+      background-color: #17237c; /* Biru gelap */
+      color: #fffff0; /* Putih gading */
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  }
+
+  button:hover {
+      background-color: #1b2a8c; /* Biru lebih terang saat dihover */
+  }
+
+  .logout {
+      text-align: right;
+      margin-top: 20px;
+  }
+
+  .link {
+      text-align: center;
+      margin-top: 15px;
+      color: #17237c; /* Warna teks tautan */
+  }
+
+  @keyframes slide-in {
+      from {
+          opacity: 0;
+          transform: translateY(50px);
+      }
+      to {
+          opacity: 1;
+          transform: translateY(0);
+      }
+  }
+
+</style>
+
+<div class="container">
+  <h1 class="bold" style="font-size: 30px; font-family: 'Papyrus', sans-serif;">Alatas Survival</h1>
+
+  <!-- User Info Section tanpa Glassmorphism -->
+  <div class="card">
+    <h5><span class="text-capitalize"></span>Name: {{ name|title }}</h5>
+    <h5>Class: {{ class }}</h5>
+    <h5>
+      <span class="fst-italic">"It's not just about edged weapons and rifles. Nor is it about the strongest fervent and fervor til the very end. It's about surviving to the last drop of blood... for the dearest one." -Al.</span>
+    </h5>
+  </div>
+
+  <h1 class="bold" style="font-size: 24px; font-family: 'Papyrus', sans-serif;">Survival Entries</h1>
+  
+  {% if not survival_entries %}
+  <p>Belum ada data survival entry pada tracker.</p>
+  {% else %}
+  <table>
+    <tr>
+      <th>Nama Barang</th>
+      <th>Waktu Masuk</th>
+      <th>Harga</th>
+      <th>Deskripsi</th>
+      <th>Aksi</th>
+    </tr>
+
+    {% for survival_entry in survival_entries %}
+    <tr>
+      <td>{{survival_entry.name}}</td>
+      <td>{{survival_entry.time}}</td>
+      <td>{{survival_entry.price}}</td>
+      <td>{{survival_entry.description}}</td>
+      <td class="action-buttons">
+        <a href="{% url 'main:edit_survival_entry' survival_entry.pk %}">
+          <button>Edit</button>
+        </a>
+        <a href="{% url 'main:delete_survival_entry' survival_entry.pk %}">
+          <button style="background-color: #dc3545;">Delete</button>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+  
+  <br />
+
+  <a href="{% url 'main:create_survival_entry' %}">
+    <button>Add New Survival Entry</button>
+  </a>
+
+  <div class="logout">
+    <a href="{% url 'main:logout' %}">
+      <button>Logout</button>
+    </a>
+    <h5>Sesi terakhir login: {{ last_login }}</h5>  
+  </div>
+</div>
+
+<div class="container">
+  <h2 class="bold" style="font-size: 24px; font-family: 'Papyrus', sans-serif;">The Cards of Your Survival Entries</h2>
+
   {% for survival_entry in survival_entries %}
-  <tr>
-    <td>{{survival_entry.name}}</td>
-    <td>{{survival_entry.time}}</td>
-    <td>{{survival_entry.price}}</td>
-    <td>{{survival_entry.description}}</td>
-  </tr>
+      <div class="card mb-3" style="max-width: 300;">
+          <div class="row g-0">
+              <div class="col-md-4">
+                  <img src="{% static 'image/power2.jpg' %}" class="img-fluid rounded-start" alt="{{ survival_entry.name }}">
+              </div>
+              <div class="col-md-8">
+                  <div class="card-body">
+                      <h5 class="card-title">{{ survival_entry.name }}</h5>
+                      <p class="card-text">{{ survival_entry.description }}</p>
+                      <p class="card-text"><small class="text-body-secondary">Price: {{ survival_entry.price }}</small></p>
+                      <!-- Tambahkan tombol Edit dan Delete di sini -->
+                      <div class="action-buttons" style="position: absolute; top: 10px; right: 10px;">
+                        <a href="{% url 'main:edit_survival_entry' survival_entry.pk %}">
+                            <button  style="background-color: #1f2d78 ; color: blue-800">Edit</button>
+                        </a>
+                        <a href="{% url 'main:delete_survival_entry' survival_entry.pk %}">
+                            <button style="background-color: #dc3545">Delete</button>
+                        </a>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  {% empty %}
+      <p>No survival entries found.</p>
   {% endfor %}
-</table>
-{% endif %}
+</div>
 
-<br />
-
-<a href="{% url 'main:create_survival_entry' %}">
-  <button>Add New Survival Entry</button>
-</a>
 
 {% endblock content %}
