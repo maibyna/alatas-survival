@@ -1,9 +1,80 @@
 README TUGAS 5
 
+A. Menjawab Pertanyaan Tugas:
+1) Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+
+CSS selector, merupakan bagian dari bahasa CSS yang digunakan untuk menunjuk atau memilih elemen HTML tertentu yang ingin diubah gaya tampilannya. 
+Dan ketika terdapat beberapa CSS selector yang menargetkan elemen HTML yang sama, browser akan mengikuti aturan prioritas tertentu untuk menentukan gaya mana yang akan diterapkan. Aturan ini dikenal sebagai CSS Cascade.
+
+Faktor-Faktor yang Mempengaruhi Prioritas
+>>dari yang terendah menuju yang tertinggi
+a. Selector Universal (*): Memilih semua elemen.
+b. Selector Tag (misalnya div, p, h1): Memilih elemen berdasarkan nama tag.
+c. Selector Kelas (.classname): Memilih elemen dengan kelas tertentu.
+d. Selector ID (#idname): Memilih elemen berdasarkan ID.
+e. Inline Styles: Gaya yang diterapkan langsung pada elemen menggunakan atribut style.
+f. !important: Meskipun bukan bentuk spesifisitas, aturan ini memiliki prioritas tertinggi, dan akan mengoverride semua yang lainnya jika ada.
+
+Atau dapat juga dinyatakan dengan:
+Spesifisitas: ID Selector>>Class Selector>>Combinator
+Kepentingan: Inline styles, important declaration
+Urutan Penulisan:-
+
+2) Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design
+>>Responsive design adalah pendekatan dalam pengembangan web untuk membuat halaman web terlihat baik di berbagai ukuran layar dan perangkat. Design yang resposive membawa berbagai keuntungan, yaitu: 
+
+Pengalaman Pengguna: Lebih mudah bagi pengguna untuk menggunakan (userfriendly) serta memastikan pengguna mendapatkan pengalaman yang baik, terlepas dari perangkat yang digunakan.
+SEO: Mesin pencari lebih menyukai situs yang responsif. Hal ini membawa peluang bagi sistem menjadi rekomendasi urutan top dalam pelayanan pengguna internet.
+Ketersediaan: Meningkatkan aksesibilitas untuk semua pengguna.
+
+Contoh Aplikasi yang Sudah Menerapkan Responsive Design:
+Google: Halaman pencariannya dapat beradaptasi dengan ukuran layar.
+Twitter: Aplikasi webnya mengubah tampilan berdasarkan perangkat yang digunakan. 
+YouTube: Platform berbagi video ini juga memiliki desain yang sangat responsif. Video akan secara otomatis menyesuaikan ukurannya agar sesuai dengan layar perangkat, dan pengguna dapat dengan mudah mengontrol pemutaran video.
+
+
+3) Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!
+Margin: Ruang di luar elemen. Margin dapat digunakan untuk menciptakan jarak antar elemen. Ini berguna untuk memberikan jarak yang rapi dalam web yang kita gunakan.
+>>Contoh:
+.box {
+  margin: 20px;
+}
+
+Border: Garis yang mengelilingi elemen. Border dapat disesuaikan dengan lebar, jenis garis, dan warna.
+>>Contoh:
+.box {
+  border: 2px solid black;
+}
+
+Padding: Ruang di dalam elemen, antara konten dan batas elemen. Padding menciptakan ruang di dalam elemen itu sendiri.
+>>Contoh
+.box {
+  padding: 10px;
+}
+
+
+
+
+
+4)  Jelaskan konsep flex box dan grid layout beserta kegunaannya!
+>>Flexbox: Model layout termasuk model yang cocok untuk layout satu dimensi (baris atau kolom) yang memungkinkan elemen didistribusikan dengan lebih efisien di dalam kontainer.
+Kegunaan: Membuat layout responsif, membuat elemen mudah diatur dalam baris atau kolom, dan menyelaraskan dan mendistribusikan ruang.
+
+>>Grid Layout: Model layout dua dimensi memungkinkan pembuatan grid kompleks. Ini memudahkan penataan elemen secara bersamaan dalam baris dan kolom, dengan ekspansi baris yang bisa dikustomisasi.
+Kegunaan: Sangat cocok untuk layout yang lebih kompleks, seperti dashboard dengan elemen yang diatur secara bebas dalam grid.
+
+5)  Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+
+B. Penjelasan Tutorial Pengerjaan
 1. Laman Registrasi
 ![image](https://github.com/user-attachments/assets/2eb0be01-0692-4b51-8f7b-3326412dcb35)
+Salah satu implementasi yang saya terapkan adalah membuat laman register, sebagaimana proses menerima informasi/data user, sebelum menjadi terdaftar dalam sistem dan diarahkan ke bagian login kembali. Dengan tema Alatas Survival ini, saya memilih warna putih gading dan biru tua.
+Selain itu, saya juga menambahkan picture 'darkvibes' sebagai background centernya. Background ini sama dengan proses main, juga register berikut.
 
-2. Proses Login
+Bagian register ini otomatis menawarkan untuk kembali ke show-bagian login.
+
+3. Proses Login
 ![image](https://github.com/user-attachments/assets/36300865-35e6-442b-9560-f6a15fbe94a7)
 
 
