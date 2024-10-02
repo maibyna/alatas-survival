@@ -52,8 +52,11 @@ Padding: Ruang di dalam elemen, antara konten dan batas elemen. Padding mencipta
   padding: 10px;
 }
 
+Ilustrasi Perbedaan:
 
-
+Margin: Jarak antara elemen.
+Border: Bingkai yang mengelilingi elemen.
+Padding: Jarak antara konten elemen dan bingkainya.
 
 
 4)  Jelaskan konsep flex box dan grid layout beserta kegunaannya!
@@ -78,20 +81,23 @@ Bagian register ini otomatis menawarkan untuk kembali ke show-bagian login.
 ![image](https://github.com/user-attachments/assets/36300865-35e6-442b-9560-f6a15fbe94a7)
 
 
+4. Homepage ketika user masuk ke dalam proses
 ![image](https://github.com/user-attachments/assets/c3798259-604f-4a9c-9c05-a2a40a93d72e)
-
+Dalam tampilan ini, data user berupa username dan kelas akan ditampilkan. Ada dua layar sekaligus yang ditampilkan yaitu bagian awal, berupa data product masuk yang disajikan dalam list, serta card di bagian bawah untuk memberi viusalisasi yang lebih baik. Dalam laman ini juga telah include sistem navigasi bar paling atas, yang menampilkan Aplikasi main, welcoming user serta logout. Dalam adaptasinya telah ditampilkan sebagai responsive terhadap mobile dan juga dekstop.
 
 ![image](https://github.com/user-attachments/assets/23d411e0-ec30-4a32-8a7b-4c1fb154278c)
 
-3.
+5. Bagian untuk menambahkan Product
 ![image](https://github.com/user-attachments/assets/9cda6285-761b-4d25-9861-7ea3fba06ff2)
+Sebelum product ditampilkan, tentu harus ada data yang masuk. Nah bagian ini yang menerima untuk memasukkan nama product, price serta description
 
-4. 
+6. Bagian Edit
 ![image](https://github.com/user-attachments/assets/41042ae8-1d64-4e98-9637-19ea08e8e82f)
+Ini ditujukan untuk mengedit product yang telah masuk. Namun edit ini hampir mirip dengan menambahkan, karena semua unit sifatnya diisi ulang, namun boleh dibatalkan.
 
-5.
+7. Sesi Bagian Bawah yang menampilkan card
 ![image](https://github.com/user-attachments/assets/143fbcd6-29c2-452f-a9dd-3a0f09c26281)
-
+Jika memungkinkan, nantinya user akan diusahakan bisa mengedit foto productnya sendiri. Karena masih dalam perkembangan, dan mengangkat tema magical, maka sementara menyajikan card default, yang bisa diubah  hanya key umumnya seperti nama, price, dan description.
 
 
 README TUGAS 4
