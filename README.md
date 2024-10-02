@@ -1,3 +1,28 @@
+README TUGAS 5
+
+1. Laman Registrasi
+![image](https://github.com/user-attachments/assets/2eb0be01-0692-4b51-8f7b-3326412dcb35)
+
+2. Proses Login
+![image](https://github.com/user-attachments/assets/36300865-35e6-442b-9560-f6a15fbe94a7)
+
+
+![image](https://github.com/user-attachments/assets/c3798259-604f-4a9c-9c05-a2a40a93d72e)
+
+
+![image](https://github.com/user-attachments/assets/23d411e0-ec30-4a32-8a7b-4c1fb154278c)
+
+3.
+![image](https://github.com/user-attachments/assets/9cda6285-761b-4d25-9861-7ea3fba06ff2)
+
+4. 
+![image](https://github.com/user-attachments/assets/41042ae8-1d64-4e98-9637-19ea08e8e82f)
+
+5.
+![image](https://github.com/user-attachments/assets/143fbcd6-29c2-452f-a9dd-3a0f09c26281)
+
+
+
 README TUGAS 4
  1. Apa perbedaan antara HttpResponseRedirect() dan redirect()
 Keduanya sama-sama library langsung Django yang di-import, namun perbedaannya terdapat pada hierarki penggunaan. HttpResponseRedirect() secara penggunaan, mewajibkan developer untuk menyebutkan secara eksplisit link/url/atau tautan yang ingin disambungkan. Dalam program saya biasa digunakan untuk ke situs peramban html yang saya buat.
