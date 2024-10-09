@@ -10,7 +10,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.utils.html import strip_tags
 
 @login_required(login_url='/login')
 def show_main(request):
@@ -51,6 +53,7 @@ def login_user(request):
             return response
 
     else:
+        messages.error(request, "Invalid username or password. Please try again.")
         form = AuthenticationForm(request)
     context = {'form': form}
     return render(request, 'login.html', context)
@@ -82,6 +85,21 @@ def create_survival_entry(request):
     context = {"form" : form}
     return render(request, "create_survival_entry.html", context)
 
+@csrf_exempt
+@require_POST
+def add_survival_entry_ajax(request):
+    name = strip_tags(request.POST.get("name"))
+    price = strip_tags(request.POST.get("price"))
+    description = strip_tags(request.POST.get("description"))
+    user = request.user
+
+    new_entry = SurvivalEntry(
+        name=name, price=price, description=description, user=user
+    )
+    new_entry.save()
+
+    return HttpResponse(b"CREATED", status=201)
+
 def edit_survival_entry(request, id):
     # Get mood entry berdasarkan id
     survival = SurvivalEntry.objects.get(pk = id)
@@ -106,17 +124,21 @@ def delete_survival_entry(request, id):
     return HttpResponseRedirect(reverse('main:show_main'))
 
 def show_xml(request):
-    data = SurvivalEntry.objects.all()
+    data = SurvivalEntry.objects.filter(user=request.user)
+    #data = SurvivalEntry.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    data = SurvivalEntry.objects.all()
+    data = SurvivalEntry.objects.filter(user=request.user)
+    #data = SurvivalEntry.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
-    data = SurvivalEntry.objects.filter(pk=id)
+    data = SurvivalEntry.objects.filter(user=request.user)
+    #data = SurvivalEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json_by_id(request, id):
-    data = SurvivalEntry.objects.filter(pk=id)
+    data = SurvivalEntry.objects.filter(user=request.user)
+    #data = SurvivalEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")

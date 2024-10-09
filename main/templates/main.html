@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
 {% include 'navbar.html' %}
-
+{% block content %}
 <style>
   body {
       font-family: Arial, sans-serif;
@@ -164,6 +163,11 @@
     <button>Add New Survival Entry</button>
   </a>
 
+  <a href="{% url 'main:create_survival_entry' %}">
+    <button>Add New Survival Entry by AJAX</button>  <!-- Tambahkan tombol "Add New Survival Entry by AJAX, beserta bagaimana itu mempengaruhi program agar sesuai keinginan, penanganan or" -->
+  </a>
+
+
   <div class="logout">
     <a href="{% url 'main:logout' %}">
       <button>Logout</button>
@@ -203,4 +207,103 @@
   {% endfor %}
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.7/dist/purify.min.js"></script>
+
+<!-- Modal untuk menambah entri survival dengan AJAX -->
+<div id="crudModal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 w-full flex items-center justify-center bg-gray-800 bg-opacity-50 overflow-x-hidden overflow-y-auto transition-opacity duration-300 ease-out">
+  <div id="crudModalContent" class="relative bg-white rounded-lg shadow-lg w-5/6 sm:w-3/4 md:w-1/2 lg:w-1/3 mx-4 sm:mx-0 transform scale-95 opacity-0 transition-transform transition-opacity duration-300 ease-out">
+    <div class="flex items-center justify-between p-4 border-b rounded-t">
+      <h3 class="text-xl font-semibold text-gray-900">Add New Survival Entry</h3>
+      <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" id="closeModalBtn" onclick="closeModal();">
+        &times;
+      </button>
+    </div>
+    <div class="px-6 py-4 space-y-6">
+      <form id="survivalEntryForm">
+        <div class="mb-4">
+          <label for="product_name" class="block text-sm font-medium text-gray-700">Product Name</label>
+          <input type="text" id="product_name" name="product_name" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Enter product name" required>
+        </div>
+        <div class="mb-4">
+          <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
+          <textarea id="description" name="description" rows="3" class="mt-1 block w-full h-52 resize-none border border-gray-300 rounded-md p-2 hover:border-indigo-700" placeholder="Describe the product" required></textarea>
+        </div>
+        <div class="mb-4">
+          <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+          <input type="number" id="price" name="price" min="1" class="mt-1 block w-full border border-gray-300 rounded-md p-2 hover:border-indigo-700" required>
+        </div>
+      </form>
+    </div>
+    <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2 p-6 border-t border-gray-200 rounded-b justify-center md:justify-end">
+      <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg" id="cancelButton" onclick="closeModal();">Cancel</button>
+      <button type="submit" id="submitSurvivalEntry" form="survivalEntryForm" class="bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg" onclick="submitSurvivalEntry(event);">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  async function submitSurvivalEntry(event) {
+    event.preventDefault(); // Mencegah refresh halaman
+    const formData = new FormData(document.getElementById('survivalEntryForm'));
+    const response = await fetch("{% url 'main:create_survival_entry' %}", {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}', // Mengatur CSRF token
+      }
+    });
+
+    if (response.ok) {
+      await refreshSurvivalEntries(); // Segarkan entri survival
+      closeModal(); // Tutup modal
+    } else {
+      alert("Error adding entry."); // Tangani kesalahan
+    }
+  }
+
+  function showModal() {
+    document.getElementById("crudModal").classList.remove("hidden");
+    document.getElementById("crudModalContent").classList.remove("opacity-0", "scale-95");
+    document.getElementById("crudModalContent").classList.add("opacity-100", "scale-100");
+  }
+
+  function closeModal() {
+    document.getElementById("crudModal").classList.add("hidden");
+    document.getElementById("crudModalContent").classList.add("opacity-0", "scale-95");
+  }
+
+  async function getSurvivalEntries() {
+    return fetch("{% url 'main:show_json' %}").then((res) => res.json());
+  }
+
+  async function refreshSurvivalEntries() {
+    document.getElementById("survival_entry_cards").innerHTML = "";
+    const survivalEntries = await getSurvivalEntries();
+    let htmlString = "";
+
+    survivalEntries.forEach((item) => {
+      const productName = DOMPurify.sanitize(item.fields.product_name);
+      const description = DOMPurify.sanitize(item.fields.description);
+      const price = item.fields.price;
+      const time = item.fields.time;
+
+      htmlString += `
+        <div class="relative break-inside-avoid">
+          <div class="relative top-5 bg-indigo-100 shadow-md rounded-lg mb-6 break-inside-avoid flex flex-col border-2 border-indigo-300">
+            <div class="bg-indigo-200 text-gray-800 p-4 rounded-t-lg border-b-2 border-indigo-300">
+              <h3 class="font-bold text-xl mb-2">${productName}</h3>
+              <p class="text-gray-600">${time}</p>
+            </div>
+            <div class="p-4">
+              <p class="font-semibold text-lg mb-2">${description}</p>
+              <p class="text-gray-800">Price: $${price}</p>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    document.getElementById("survival_entry_cards").innerHTML = htmlString;
+  }
+</script>
 {% endblock content %}

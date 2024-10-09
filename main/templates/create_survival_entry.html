@@ -4,6 +4,9 @@
 
 {% block meta %}
 <title>Add New Survival Entry</title>
+{% endblock meta %}
+
+{% block content %}
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -37,12 +40,7 @@
         }
     }
 </style>
-{% endblock meta %}
 
-{% block content %}
-{% include 'navbar.html' %}
-
-<<<<<<< HEAD
 <div class="flex flex-col min-h-screen">
     <div class="container mx-auto px-4 py-8 mt-16 max-w-lg">
         <h1 class="text-4xl font-bold text-center mb-6 text-[#fffff0]">Add New Survival Entry</h1>
@@ -72,34 +70,5 @@
         </div>
     </div>
 </div>
-=======
-<h2>Available Products</h2>
-<ul>
-    {% for product in products %}
-    <li>
-        <strong>{{ product.name }}</strong><br>
-        Price: ${{ product.price }}<br>
-        Description: {{ product.description }}<br>
-    </li>
-    {% endfor %}
-</ul>
 
-<h2>Choose Product to Purchase</h2>
-<form method="POST">
-    {% csrf_token %}
-    <label for="product_id">Select Product:</label>
-    <select name="product_id" id="product_id">
-        {% for product in products %}
-        <option value="{{ product.id }}">{{ product.name }} - ${{ product.price }}</option>
-        {% endfor %}
-    </select>
-    
-    <label for="quantity">Quantity:</label>
-    <input type="number" name="quantity" id="quantity" min="1" value="1" />
-
-    <input type="submit" value="Purchase" />
-</form>
-
-
->>>>>>> 295280dd14830525e1259534734d33c72263a24e
 {% endblock %}
