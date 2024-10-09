@@ -1,5 +1,80 @@
-README TUGAS 5
+Nama     : Maibyna Khairanisya
+NPM      : 2306165723
 
+README TUGAS 6
+Menjawab Pertanyaan:
+1. Manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web:
+
+JavaScript sangat penting dalam pengembangan aplikasi web modern karena memiliki banyak manfaat:
+>>Interaktivitas: JavaScript memungkinkan pengembang untuk membuat halaman web yang interaktif, seperti memperbarui konten tanpa harus memuat ulang seluruh halaman. Hal ini akan sangat membantu meningkatkan pengalaman pengguna.
+>>Kecepatan: Karena JavaScript dijalankan di sisi klien (browser), banyak tugas dapat dilakukan lebih cepat tanpa menunggu server merespons, seperti validasi form atau animasi.
+>>Asynchronous programming: JavaScript mendukung pengembangan aplikasi dengan asinkronisasi, misalnya menggunakan fetch() untuk mengambil data dari server tanpa mengganggu halaman utama.
+>>Cross-browser compatibility: JavaScript berjalan di hampir semua browser modern, sehingga aplikasi web bisa diakses dari berbagai perangkat.
+Komunitas yang besar: Banyak pustaka dan framework yang tersedia, seperti React, Vue, dan Angular, yang memudahkan pengembang membuat aplikasi web skala besar dengan fitur canggih.
+
+
+2. Fungsi dari penggunaan await ketika menggunakan fetch():
+>>await digunakan dalam JavaScript untuk menghentikan eksekusi program sementara hingga suatu Promise selesai. Saat kita menggunakan fetch() untuk mengambil data dari server, operasi ini mengembalikan Promise yang belum diselesaikan (pending), karena permintaan HTTP membutuhkan waktu. Dengan await, kita memastikan bahwa kode menunggu hingga respons diterima sebelum melanjutkan ke perintah berikutnya.
+
+Contoh: let response = await fetch(url);
+
+Jika kita tidak menggunakan await, kode akan terus berjalan meskipun permintaan belum selesai, yang bisa menyebabkan masalah karena kode di bawahnya mungkin membutuhkan hasil dari fetch(). Tanpa await, kita harus menggunakan .then() untuk menangani hasil secara manual, yang bisa lebih sulit dipahami.
+
+
+3. Mengapa kita perlu menggunakan csrf_exempt pada view yang akan digunakan untuk AJAX POST?
+
+>>csrf_exempt digunakan untuk menonaktifkan perlindungan Cross-Site Request Forgery (CSRF) pada view tertentu. CSRF adalah serangan di mana pengguna yang sudah login disuruh mengirimkan request yang tidak sah dari situs lain, dan Django melindungi dari serangan ini dengan token CSRF.
+Namun, ketika kita menggunakan AJAX POST, seringkali lebih sulit untuk menyertakan token CSRF secara manual dalam permintaan, terutama jika request tidak diawali oleh formulir yang dihasilkan Django. Oleh karena itu, kita menggunakan csrf_exempt untuk menonaktifkan pemeriksaan CSRF di view tersebut.
+
+
+4. Mengapa pembersihan data input pengguna dilakukan di backend juga, bukan hanya di frontend?
+
+Melakukan validasi hanya di frontend tidak cukup aman karena:
+>>Front-end bisa dimanipulasi: Pengguna bisa mengubah atau memodifikasi kode JavaScript di browser mereka, sehingga bisa melewati validasi yang ada di frontend.
+>>Keamanan data: Validasi di backend memastikan data yang masuk aman dan sesuai dengan yang diharapkan, melindungi aplikasi dari serangan injeksi atau input yang tidak valid.
+>>Consistency: Backend harus bertanggung jawab memastikan semua data yang diterima dalam format yang benar, terlepas dari apakah input sudah divalidasi di frontend.
+
+Oleh karena itu, validasi di backend wajib dilakukan untuk menjamin keamanan dan integritas aplikasi.
+
+
+5. Implementasi step-by-step checklist di atas secara detail:
+Garis Besar Implementasi Fitur Mood dengan AJAX
+
+  1.) Mengambil data "Survival Entry atau product" dengan AJAX GET. Ini terlihat dari pembuatan function dalam views yang mengakses data product, dan mengembalikannya dalam JSON.
+>>Buat Endpoint:
+Siapkan route di backend untuk mengambil data mood pengguna yang sedang login.
+Buat fungsi di backend yang akan mengembalikan data mood dalam format JSON.
+
+>>AJAX GET:
+Di frontend, gunakan AJAX untuk melakukan permintaan ke endpoint yang sudah dibuat saat halaman dimuat.
+Tampilkan data mood yang diterima ke dalam tampilan kartu di halaman utama.
+
+
+  2.) Menambahkan Mood Baru dengan AJAX POST
+Buat Tombol dan Modal:
+Buat tombol di halaman utama untuk membuka modal yang berisi form untuk menambahkan "Survival Entry". Ini sama persis dengan form yang tanpa ajax, yaitu di create_mood_entry.html
+
+Form di Modal:
+Dalam modal, buat form dengan input untuk menuliskan product isi tadi dan tombol untuk mengirimkan data.
+
+AJAX POST:
+Saat form disubmit, gunakan AJAX untuk mengirimkan data ke endpoint yang dituju  path('create-survival-entry-ajax', add_survival_entry_ajax, name='add_survival_entry_ajax').
+Pastikan data dikirim dengan format yang tepat dan sertakan token CSRF untuk keamanan.
+
+Tanggapan dari Server:
+Jika penambahan berhasil, tutup modal dan bersihkan form dari input yang ada.
+Panggil kembali fungsi untuk mengambil data survival entry terbaru dan memperbarui tampilan tanpa memuat ulang halaman.
+Jika terjadi kesalahan saat penambahan, tampilkan pesan error kepada pengguna. <namun tidak tahu kenapa pesan errornya tidak muncul-muncul>
+
+  3.) Mengelola Data di Backend
+Fungsi untuk Menambahkan Product/Survival Entry.
+Buat fungsi di backend untuk menangani permintaan POST dan menyimpan data baru ke dalam basis data.
+Validasi:
+Pastikan data masukan "survival entry" yang diterima valid dan milik pengguna yang sedang login. 
+
+==============================================================================================================================================================================================
+
+README TUGAS 5
 A. Menjawab Pertanyaan Tugas:
 1) Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
 
@@ -100,6 +175,9 @@ Ini ditujukan untuk mengedit product yang telah masuk. Namun edit ini hampir mir
 Jika memungkinkan, nantinya user akan diusahakan bisa mengedit foto productnya sendiri. Karena masih dalam perkembangan, dan mengangkat tema magical, maka sementara menyajikan card default, yang bisa diubah  hanya key umumnya seperti nama, price, dan description.
 
 
+
+==============================================================================================================================================================================================
+
 README TUGAS 4
  1. Apa perbedaan antara HttpResponseRedirect() dan redirect()
 Keduanya sama-sama library langsung Django yang di-import, namun perbedaannya terdapat pada hierarki penggunaan. HttpResponseRedirect() secara penggunaan, mewajibkan developer untuk menyebutkan secara eksplisit link/url/atau tautan yang ingin disambungkan. Dalam program saya biasa digunakan untuk ke situs peramban html yang saya buat.
@@ -126,6 +204,8 @@ Pertama, saya terlebih dahulu membuat produk lebih lanjut terkait barang yang ad
 
 Dalam kasus ini, karena pada pemprosesan mempersiapkan history purchase pengguna, ternyata saya telah mengimplementasikan ForeignKey, dan dapat berlanjut langsung ke tahap terakhir sebelum push github.
 
+
+==============================================================================================================================================================================================
 
 README TUGAS 3
 1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
@@ -155,6 +235,7 @@ README TUGAS 3
 >>![image](https://github.com/user-attachments/assets/9c52aacb-a04b-4622-8c79-db1dac54faf9)
 >>![image](https://github.com/user-attachments/assets/8f2db3f8-2092-4680-9520-c27b3337a2ad)
 
+==============================================================================================================================================================================================
 
 README TUGAS 2
 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
