@@ -130,6 +130,7 @@ def show_xml(request):
     #data = SurvivalEntry.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
+@login_required
 def show_json(request):
     data = SurvivalEntry.objects.filter(user=request.user)
     #data = SurvivalEntry.objects.all()
@@ -140,6 +141,7 @@ def show_xml_by_id(request, id):
     #data = SurvivalEntry.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
+@login_required
 def show_json_by_id(request, id):
     data = SurvivalEntry.objects.filter(user=request.user)
     #data = SurvivalEntry.objects.filter(pk=id)
